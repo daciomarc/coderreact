@@ -24,12 +24,14 @@ const NavBar = () => {
       margin={"1px"}
       height={"6vh"}
     >
-      <Text border={"1px white solid"} borderRadius={"10px"}>Shoes Santiago</Text>
+      <Text border={"1px white solid"} borderRadius={"10px"}>
+        Shoes Santiago
+      </Text>
       <Menu>
         <MenuButton as={Button}>Menu</MenuButton>
         <MenuList>
-          <MenuItem>Ofertas</MenuItem>
-          <MenuItem>Novedades</MenuItem>
+          <MenuItem color={"black"}>Ofertas</MenuItem>
+          <MenuItem color={"black"}>Novedades</MenuItem>
         </MenuList>
       </Menu>
 
