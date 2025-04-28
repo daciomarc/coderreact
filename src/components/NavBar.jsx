@@ -18,13 +18,13 @@ const NavBar = () => {
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      width="100vw"
+      width="100%"
       padding="20px 20px 20px 20px"
-      border={"1px black solid"}
+      border={"1px white solid"}
       margin={"1px"}
       height={"6vh"}
     >
-      <Text>Shoes Santiago</Text>
+      <Text border={"1px white solid"} borderRadius={"10px"}>Shoes Santiago</Text>
       <Menu>
         <MenuButton as={Button}>Menu</MenuButton>
         <MenuList>
