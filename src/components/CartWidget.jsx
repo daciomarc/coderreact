@@ -1,12 +1,14 @@
-import { Flex } from "@chakra-ui/react";
-import { FaCartShopping } from "react-icons/fa6";
-
+import { Flex, Spacer } from "@chakra-ui/react";
+import { CiShoppingCart } from "react-icons/ci";
 
 const CartWidget = () => {
-    return (
-        <Flex alignItems={"center"}> <FaCartShopping size={32}/> 0
-        </Flex>
-    );
+  return (
+    <Flex alignItems="center" >
+        
+      <CiShoppingCart size={30} /> 0 
+
+    </Flex>
+  );
 };
 
 export default CartWidget;

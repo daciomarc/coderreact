@@ -1,23 +1,22 @@
-import React from 'react'
-import { Box, ChakraProvider, Text } from '@chakra-ui/react'
-import NavBar from './components/NavBar'
-import ItemListcontainer from './components/ItemListContainer'
+import React from "react";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
+import MainLayout from "./layouts/MainLayout";
+import ItemListContainer from "./components/ItemListContainer";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 
-const App = () => { 
-  
+const App = () => {
   return (
-    <>
-      <ChakraProvider>
-        <Text color={"white"}>
-        <Box height={"100vh"} bgColor={"black"} >
-        <NavBar />
-        <ItemListcontainer greeting="Bienvenidos a Shoes Santiago"/>
-        </Box>
-        </Text>
+    <ChakraProvider>
+      <ColorModeScript initialColorMode="dark" />
+      
+        {/* <ItemListContainer /> */}
+        <RouterProvider router={router} />
     </ChakraProvider>
-    </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
+
+

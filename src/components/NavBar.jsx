@@ -1,42 +1,48 @@
-import { Flex, Text, Button } from "@chakra-ui/react";
-//import React from 'react';
 import {
-  Menu,
+  Flex,
+  Text,
   MenuButton,
+  Menu,
   MenuList,
+  Button,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
 } from "@chakra-ui/react";
 import CartWidget from "./CartWidget";
-CartWidget;
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { getAllCategories } from "../services/products.service";
 
 const NavBar = () => {
+  const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => setCategories(res.data))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      width="100%"
-      padding="20px 20px 20px 20px"
-      border={"1px white solid"}
-      margin={"1px"}
-      height={"6vh"}
+      width="100vw"
+      padding="0 20px"
+      height="7vh"
+      border="1px solid #2e2e2e"
     >
-      <Text border={"1px white solid"} borderRadius={"10px"}>
-        Shoes Santiago
+      <Text className="test" onClick={() => navigate("/")} cursor={"pointer"}>
+        Coder's Store
       </Text>
-      <Menu>
-        <MenuButton as={Button}>Menu</MenuButton>
+      <Menu height={"200px"}>
+        <MenuButton as={Button}>Categorias</MenuButton>
         <MenuList>
-          <MenuItem color={"black"}>Ofertas</MenuItem>
-          <MenuItem color={"black"}>Novedades</MenuItem>
+          {categories.map((item) => {
+            return <MenuItem key={item.slug} onClick={() => navigate(`/category/${item.slug}`)}>{item.name}</MenuItem>;
+          })}
+          <MenuItem>Jordans</MenuItem>
         </MenuList>
       </Menu>
-
-      <div style={{ alignItems: "center" }}>Holamirrey</div>
-
       <CartWidget />
     </Flex>
   );
