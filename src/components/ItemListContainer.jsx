@@ -34,10 +34,12 @@ const ItemListContainer = ({products}) => {
 
   return (
     <Box width={"100%"} overflowX={"hidden"} p={4}>
-      <SimpleGrid columns={3} spacingX='40px' spacingY='20px' width={"100%"}>
+      <SimpleGrid columns={[1, 2, 3]} spacingX='40px' spacingY='20px' width={"100%"} >
         {products.map((product) => {
           return (
             <ItemCard
+            
+          
               key={product.id}
               id={product.id}
               image={product.thumbnail}
