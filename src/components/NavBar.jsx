@@ -30,6 +30,7 @@ const NavBar = () => {
       padding="0 20px"
       height="7vh"
       border="1px solid #2e2e2e"
+      bgColor={"blue.100"}
     >
       <Text className="test" onClick={() => navigate("/")} cursor={"pointer"}>
         Shoes Santiago

@@ -15,7 +15,7 @@ const Item = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  return loading ? <>Loading...</> : <ItemDetailContainer product={product} />;
+  return loading ? <>Cargando...</> : <ItemDetailContainer product={product} />;
 };
 
 export default Item;

@@ -7,8 +7,9 @@ const ItemCard = ({ id, image, title, description, price, discount }) => {
 
   return (
     <Box
+    bgColor={"gray.800"}
       width={"300px"}
-      borderWidth={"1px"}
+      borderWidth={"2px"}
       borderRadius={"lg"}
       color={"white"}
       transition="transform 0.3s, box-shadow 0.3s"
