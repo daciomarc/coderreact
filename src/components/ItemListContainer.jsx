@@ -7,6 +7,8 @@ const ItemCard = ({ id, image, title, description, price, discount }) => {
 
   return (
     <Box
+    position={"center"}
+    justifyContent={"space-between"}
     bgColor={"gray.800"}
       width={"300px"}
       borderWidth={"2px"}
