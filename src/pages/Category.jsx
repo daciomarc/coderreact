@@ -6,6 +6,7 @@ import { getProductsByCategory } from "../services/products.service";
 const Category = () => {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
+  
 
   useEffect(() => {
     getProductsByCategory(id)
