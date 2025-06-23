@@ -28,6 +28,7 @@ const NavBar = () => {
     >
       <Text
         fontSize="xl"
+        color={"#fff"}
         fontWeight="bold"
         cursor="pointer"
         onClick={() => navigate("/")}
@@ -35,12 +36,13 @@ const NavBar = () => {
         Shoes Santiago
       </Text>
       <Menu>
-        <MenuButton as={Button} variant="outline" colorScheme="white">
+        <MenuButton as={Button} variant="outline" colorScheme="blue">
           Categorias
         </MenuButton>
         <MenuList>
           {categories.map((item) => (
             <MenuItem
+            color={"blue.800"}
               key={item.slug}
               onClick={() => navigate(`/category/${item.slug}`)}
             >
