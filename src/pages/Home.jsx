@@ -1,32 +1,13 @@
-import { useEffect, useState } from "react";
 import ItemListContainer from "../components/ItemListContainer";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../services/config/firebase";
+import { useGetFirestoreDocs } from "../hooks/useGetFirestoreDocs";
+import { useTitle } from "../hooks/useTitle";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  
+  const { loading, error, items: products } = useGetFirestoreDocs("products");
+  useTitle("Home Page")
+  if (loading) return <>Loading...</>;
+  if (error) return <>Error</>;
 
-  useEffect(() => {
-    const productsCollection = collection(db, "products");
-
-    getDocs(productsCollection)
-    .then((snapshot) => {
-      const data = snapshot.docs.map((doc) => ({id:doc.id,
-      ...doc.data()
-    }));
-    setProducts(data)
-  })
-  .catch(() => setError(true))
-  .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <>Cargando...</>;
-  if (error) {
-    return <h1>Hubo un error</h1>;  
-  }
   return <ItemListContainer products={products} />;
 };
 

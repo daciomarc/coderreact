@@ -1,22 +1,17 @@
-import React from "react";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
-import { Switch } from '@chakra-ui/react'
-import MainLayout from "./layouts/MainLayout";
-import ItemListContainer from "./components/ItemListContainer";
+import { ChakraProvider } from "@chakra-ui/react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
+import { CartProvider } from "./context/CartContext";
 
 const App = () => {
   return (
     <ChakraProvider>
-      <ColorModeScript initialColorMode="dark" />
-      
-        {/* <ItemListContainer /> */}
+      <CartProvider>
         <RouterProvider router={router} />
+      </CartProvider>
     </ChakraProvider>
   );
 };
 
 export default App;
-
 

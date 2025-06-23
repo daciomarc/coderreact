@@ -1,21 +1,18 @@
 import { useParams } from "react-router";
 import ItemDetailContainer from "../components/ItemDetailContainer";
-import { useEffect, useState } from "react";
-import { getProductById } from "../services/products.service";
+import { useGetItemFirestore } from "../hooks/useGetItemFirestore";
+//import { useEffect } from "react";
+import { useTitle } from "../hooks/useTitle";
 
 const Item = () => {
+
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
+  
+  useTitle("Item Page")
 
-  useEffect(() => {
-    getProductById(id)
-      .then((res) => setProduct(res.data))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, [id]);
+  const { loading, item: product } = useGetItemFirestore("products", id);
 
-  return loading ? <>Cargando...</> : <ItemDetailContainer product={product} />;
+  return loading ? <>Loading...</> : <ItemDetailContainer product={product} />;
 };
 
 export default Item;
