@@ -8,7 +8,7 @@ const Item = () => {
 
   const { id } = useParams();
   
-  useTitle("Nuestros productos");
+  useTitle("Productos");
 
   const { loading, item: product } = useGetItemFirestore("products", id);
 

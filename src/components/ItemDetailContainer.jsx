@@ -78,7 +78,7 @@ const ItemDetailContainer = ({ product }) => {
 
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
             <MdLocalShipping />
-            <Text>2-3 business days delivery</Text>
+            <Text>Envios a todo el pais via Correo Argentino</Text>
           </Stack>
         </Stack>
       </SimpleGrid>

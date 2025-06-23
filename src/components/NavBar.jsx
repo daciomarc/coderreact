@@ -19,27 +19,34 @@ const NavBar = () => {
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      width="100vw"
-      padding="0 20px"
+      width="100%"
+      padding="1rem"
       height="7vh"
-      border="1px solid #2e2e2e"
+      backgroundColor="#2e2e2e"
+      color="#fff"
+      boxShadow="md"
     >
-      <Text className="test" onClick={() => navigate("/")} cursor={"pointer"}>
-        Shoes Santiago 
+      <Text
+        fontSize="xl"
+        fontWeight="bold"
+        cursor="pointer"
+        onClick={() => navigate("/")}
+      >
+        Shoes Santiago
       </Text>
-      <Menu height={"200px"}>
-        <MenuButton as={Button}>Categorias</MenuButton>
+      <Menu>
+        <MenuButton as={Button} variant="outline" colorScheme="white">
+          Categorias
+        </MenuButton>
         <MenuList>
-          {categories.map((item) => {
-            return (
-              <MenuItem
-                key={item.slug}
-                onClick={() => navigate(`/category/${item.slug}`)}
-              >
-                {item.name}
-              </MenuItem>
-            );
-          })}
+          {categories.map((item) => (
+            <MenuItem
+              key={item.slug}
+              onClick={() => navigate(`/category/${item.slug}`)}
+            >
+              {item.name}
+            </MenuItem>
+          ))}
         </MenuList>
       </Menu>
       <CartWidget />
