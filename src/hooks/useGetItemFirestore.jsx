@@ -21,7 +21,7 @@ export const useGetItemFirestore = (collectionName, id) => {
       })
       .catch((e) => console.error(e))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [collectionName, id]);
 
   return { item, loading };
 };

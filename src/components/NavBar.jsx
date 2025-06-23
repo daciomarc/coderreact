@@ -25,7 +25,7 @@ const NavBar = () => {
       border="1px solid #2e2e2e"
     >
       <Text className="test" onClick={() => navigate("/")} cursor={"pointer"}>
-        Coder's Store
+        Shoes Santiago 
       </Text>
       <Menu height={"200px"}>
         <MenuButton as={Button}>Categorias</MenuButton>

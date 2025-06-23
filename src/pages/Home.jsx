@@ -4,7 +4,7 @@ import { useTitle } from "../hooks/useTitle";
 
 const Home = () => {
   const { loading, error, items: products } = useGetFirestoreDocs("products");
-  useTitle("Home Page")
+  useTitle("Shoes Santiago")
   if (loading) return <>Loading...</>;
   if (error) return <>Error</>;
 
