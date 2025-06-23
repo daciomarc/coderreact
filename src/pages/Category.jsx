@@ -6,7 +6,7 @@ import { db } from "../services/config/firebase";
 const Category = () => {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
-  
+
 
   useEffect(() => {
     const productsQuery = query(

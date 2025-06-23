@@ -80,6 +80,7 @@ const Cart = () => {
                       size="sm"
                       onClick={() => removeProductFromCart(item)}
                       isDisabled={item.quantity === 1}
+                      
                     />
                     <Text>{item.quantity}</Text>
                     <IconButton

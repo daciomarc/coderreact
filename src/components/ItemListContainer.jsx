@@ -7,6 +7,7 @@ const ItemCard = ({ id, image, title, description, price, discount }) => {
 
   return (
     <Box
+      bgGradient={"linear(to-r, red.400, yellow.400)"}
       width={"300px"}
       borderWidth={"1px"}
       borderRadius={"lg"}
