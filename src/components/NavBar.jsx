@@ -36,7 +36,7 @@ const NavBar = () => {
         Shoes Santiago
       </Text>
       <Menu>
-        <MenuButton as={Button} variant="outline" colorScheme="blue">
+        <MenuButton as={Button} variant="outline" colorScheme="white">
           Categorias
         </MenuButton>
         <MenuList>
@@ -47,7 +47,7 @@ const NavBar = () => {
               onClick={() => navigate(`/category/${item.slug}`)}
             >
               {item.name}
-            </MenuItem>
+            </MenuItem> 
           ))}
         </MenuList>
       </Menu>
