@@ -20,9 +20,15 @@ const ItemDetailContainer = ({ product }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [mainImage, setMainImage] = useState("");
 
+  // Safely format price
+  const formatPrice = (price) => {
+    const numericPrice = Number(price) || 0;
+    return numericPrice.toFixed(2);
+  };
+
   useEffect(() => {
     if (product) {
-      // Set the main image - try thumbnail first, then first image from images array
+      // Set the main image
       const img = product.thumbnail || 
                  (product.images && product.images[0]) || 
                  'https://via.placeholder.com/600x400?text=No+Image';
@@ -62,7 +68,7 @@ const ItemDetailContainer = ({ product }) => {
             )}
             <Image
               rounded={"md"}
-              alt={`Product image for ${product.title}`}
+              alt={`Product image for ${product.title || 'product'}`}
               src={mainImage}
               objectFit={"contain"}
               align={"center"}
@@ -86,14 +92,14 @@ const ItemDetailContainer = ({ product }) => {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {product.title}
+              {product.title || 'Untitled Product'}
             </Heading>
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={300}
               fontSize={"2xl"}
             >
-              ${product.price.toFixed(2)}
+              ${formatPrice(product.price)}
             </Text>
           </Box>
 
@@ -112,7 +118,7 @@ const ItemDetailContainer = ({ product }) => {
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
-                {product.description}
+                {product.description || 'No description available'}
               </Text>
             </VStack>
           </Stack>
