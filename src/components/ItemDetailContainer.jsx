@@ -6,16 +6,43 @@ import {
   Image,
   Flex,
   VStack,
-  Button,
   Heading,
   SimpleGrid,
   StackDivider,
   useColorModeValue,
+  Skeleton
 } from "@chakra-ui/react";
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
+import { useEffect, useState } from "react";
 
 const ItemDetailContainer = ({ product }) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [mainImage, setMainImage] = useState("");
+
+  useEffect(() => {
+    if (product) {
+      // Set the main image - try thumbnail first, then first image from images array
+      const img = product.thumbnail || 
+                 (product.images && product.images[0]) || 
+                 'https://via.placeholder.com/600x400?text=No+Image';
+      setMainImage(img);
+    }
+  }, [product]);
+
+  const handleImageError = (e) => {
+    e.target.src = 'https://via.placeholder.com/600x400?text=Image+Not+Found';
+    setImageLoading(false);
+  };
+
+  if (!product) {
+    return (
+      <Container maxW={"7xl"}>
+        <Text>Product not found</Text>
+      </Container>
+    );
+  }
+
   return (
     <Container maxW={"7xl"}>
       <SimpleGrid
@@ -24,17 +51,33 @@ const ItemDetailContainer = ({ product }) => {
         py={{ base: 18, md: 24 }}
       >
         <Flex>
-          {product.images ? (
+          <Box position="relative" w="100%" h={{ base: "100%", sm: "400px", lg: "500px" }}>
+            {imageLoading && (
+              <Skeleton 
+                position="absolute"
+                w="100%"
+                h="100%"
+                borderRadius="md"
+              />
+            )}
             <Image
               rounded={"md"}
-              alt={"product image"}
-              src={product.images[0]}
-              fit={"cover"}
+              alt={`Product image for ${product.title}`}
+              src={mainImage}
+              objectFit={"contain"}
               align={"center"}
               w={"100%"}
-              h={{ base: "100%", sm: "400px", lg: "500px" }}
+              h={"100%"}
+              position="absolute"
+              top={0}
+              left={0}
+              onLoad={() => setImageLoading(false)}
+              onError={handleImageError}
+              display={imageLoading ? "none" : "block"}
+              bg="white"
+              p={4}
             />
-          ) : null}
+          </Box>
         </Flex>
         <Stack spacing={{ base: 6, md: 10 }}>
           <Box as={"header"}>
@@ -50,7 +93,7 @@ const ItemDetailContainer = ({ product }) => {
               fontWeight={300}
               fontSize={"2xl"}
             >
-              ${product.price}
+              ${product.price.toFixed(2)}
             </Text>
           </Box>
 
