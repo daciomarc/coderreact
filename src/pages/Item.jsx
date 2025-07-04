@@ -10,7 +10,7 @@ const Item = () => {
   
   useTitle("Productos");
 
-  const { loading, item: product } = useGetItemFirestore("products", id);
+  const { loading, item: product } = useGetItemFirestore("products", id, );
 
   return loading ? <>Loading...</> : <ItemDetailContainer product={product} />;
 };

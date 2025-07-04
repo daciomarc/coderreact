@@ -8,6 +8,8 @@ import AddDoc from "../pages/AddDoc";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 
+
+
 const routes = [
   {
     path: "/",
