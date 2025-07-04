@@ -48,7 +48,7 @@ const ItemCard = ({ id, image, title, description, price, discount }) => {
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && navigate(`/item/${id}`)}
     >
-      {hasDiscount && (
+      {/* {hasDiscount && (
         <Badge 
           colorScheme="red" 
           position="absolute" 
@@ -62,7 +62,7 @@ const ItemCard = ({ id, image, title, description, price, discount }) => {
           {numericDiscount}% OFF
         </Badge>
       )}
-      
+       */}
       <Box position="relative" pt="100%">
         <Image
           alt={title || 'Product image'}
