@@ -15,18 +15,26 @@ import {
 import { MdLocalShipping } from "react-icons/md";
 import ItemCount from "./ItemCount";
 import { useEffect, useState } from "react";
+import { keyframes } from "@emotion/react"; // Correct import for keyframes
 
 const ItemDetailContainer = ({ product }) => {
-  
+  // Animation for image hover
+  const floatAnimation = keyframes`
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  `;
+
   const [imageLoading, setImageLoading] = useState(true);
   const [mainImage, setMainImage] = useState("");
   
-  // color mode valores
+  // Color mode values
   const textColor = useColorModeValue("gray.900", "gray.400");
   const dividerColor = useColorModeValue("gray.200", "gray.600");
   const descriptionColor = useColorModeValue("gray.500", "gray.400");
+  const float = `${floatAnimation} 3s ease-in-out infinite`;
 
-  // formato de precio
+  // Safely format price
   const formatPrice = (price) => {
     const numericPrice = Number(price) || 0;
     return numericPrice.toFixed(2);
@@ -34,12 +42,11 @@ const ItemDetailContainer = ({ product }) => {
 
   useEffect(() => {
     if (product) {
-      // First try thumbnail, then first image from array, then fallback
       const img = product.thumbnail || 
-                 (product.images && product.images.length > 0 ? product.images[0] : null) || 
+                 (product.images && product.images[0]) || 
                  'https://via.placeholder.com/600x400?text=No+Image';
       setMainImage(img);
-      setImageLoading(true); // Reset loading state when image changes
+      setImageLoading(true);
     }
   }, [product]);
 
@@ -68,15 +75,17 @@ const ItemDetailContainer = ({ product }) => {
             position="relative" 
             w="100%" 
             h={{ base: "100%", sm: "400px", lg: "500px" }}
-            borderRadius="md"
+            borderRadius="xl"
             overflow="hidden"
             bg="white"
+            boxShadow="xl"
           >
             {imageLoading && (
               <Skeleton 
                 position="absolute"
                 w="100%"
                 h="100%"
+                borderRadius="xl"
               />
             )}
             <Image
@@ -88,22 +97,28 @@ const ItemDetailContainer = ({ product }) => {
               position="absolute"
               top={0}
               left={0}
-              p={4}
+              p={8}
               onLoad={() => setImageLoading(false)}
               onError={handleImageError}
               display={imageLoading ? "none" : "block"}
+              animation={float}
+              _hover={{
+                animation: "none",
+                transform: "scale(1.05)"
+              }}
+              transition="transform 0.3s ease"
             />
           </Box>
         </Flex>
         
-        {/* Right column with product details */}
         <Stack spacing={{ base: 6, md: 10 }}>
-          {/* Product title and price */}
           <Box as={"header"}>
             <Heading
               lineHeight={1.1}
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+              bgGradient="linear(to-r, blue.600, purple.600)"
+              bgClip="text"
             >
               {product.title || 'Untitled Product'}
             </Heading>
@@ -111,12 +126,12 @@ const ItemDetailContainer = ({ product }) => {
               color={textColor}
               fontWeight={300}
               fontSize={"2xl"}
+              mt={2}
             >
               ${formatPrice(product.price)}
             </Text>
           </Box>
 
-          {}
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={"column"}
@@ -135,10 +150,8 @@ const ItemDetailContainer = ({ product }) => {
             </VStack>
           </Stack>
 
-          {/* componente para agregar al carrito */}
           <ItemCount product={product} />
 
-          {/* info de envio */}
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
             <MdLocalShipping />
             <Text>Hacemos envios a todo el pais via Correo Argentino!</Text>
