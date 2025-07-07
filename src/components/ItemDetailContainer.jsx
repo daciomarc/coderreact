@@ -17,10 +17,16 @@ import ItemCount from "./ItemCount";
 import { useEffect, useState } from "react";
 
 const ItemDetailContainer = ({ product }) => {
+  
   const [imageLoading, setImageLoading] = useState(true);
   const [mainImage, setMainImage] = useState("");
+  
+  // Color mode values
+  const textColor = useColorModeValue("gray.900", "gray.400");
+  const dividerColor = useColorModeValue("gray.200", "gray.600");
+  const descriptionColor = useColorModeValue("gray.500", "gray.400");
 
-  // cambiando formato de precio
+  // Safely format price
   const formatPrice = (price) => {
     const numericPrice = Number(price) || 0;
     return numericPrice.toFixed(2);
@@ -28,11 +34,12 @@ const ItemDetailContainer = ({ product }) => {
 
   useEffect(() => {
     if (product) {
-      
+      // First try thumbnail, then first image from array, then fallback
       const img = product.thumbnail || 
-                 (product.images && product.images[0]) || 
+                 (product.images && product.images.length > 0 ? product.images[0] : null) || 
                  'https://via.placeholder.com/600x400?text=No+Image';
       setMainImage(img);
+      setImageLoading(true); // Reset loading state when image changes
     }
   }, [product]);
 
@@ -57,35 +64,41 @@ const ItemDetailContainer = ({ product }) => {
         py={{ base: 18, md: 24 }}
       >
         <Flex>
-          <Box position="relative" w="100%" h={{ base: "100%", sm: "400px", lg: "500px" }}>
+          <Box 
+            position="relative" 
+            w="100%" 
+            h={{ base: "100%", sm: "400px", lg: "500px" }}
+            borderRadius="md"
+            overflow="hidden"
+            bg="white"
+          >
             {imageLoading && (
               <Skeleton 
                 position="absolute"
                 w="100%"
                 h="100%"
-                borderRadius="md"
               />
             )}
             <Image
-              rounded={"md"}
-              alt={`Product image for ${product.title || 'product'}`}
               src={mainImage}
-              objectFit={"contain"}
-              align={"center"}
-              w={"100%"}
-              h={"100%"}
+              alt={`Product image for ${product.title || 'product'}`}
+              objectFit="contain"
+              w="100%"
+              h="100%"
               position="absolute"
               top={0}
               left={0}
+              p={4}
               onLoad={() => setImageLoading(false)}
               onError={handleImageError}
               display={imageLoading ? "none" : "block"}
-              bg="white"
-              p={4}
             />
           </Box>
         </Flex>
+        
+        {/* Right column with product details */}
         <Stack spacing={{ base: 6, md: 10 }}>
+          {/* Product title and price */}
           <Box as={"header"}>
             <Heading
               lineHeight={1.1}
@@ -95,7 +108,7 @@ const ItemDetailContainer = ({ product }) => {
               {product.title || 'Untitled Product'}
             </Heading>
             <Text
-              color={useColorModeValue("gray.900", "gray.400")}
+              color={textColor}
               fontWeight={300}
               fontSize={"2xl"}
             >
@@ -103,18 +116,17 @@ const ItemDetailContainer = ({ product }) => {
             </Text>
           </Box>
 
+          {/* Product description */}
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={"column"}
             divider={
-              <StackDivider
-                borderColor={useColorModeValue("gray.200", "gray.600")}
-              />
+              <StackDivider borderColor={dividerColor} />
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
               <Text
-                color={useColorModeValue("gray.500", "gray.400")}
+                color={descriptionColor}
                 fontSize={"2xl"}
                 fontWeight={"300"}
               >
@@ -123,8 +135,10 @@ const ItemDetailContainer = ({ product }) => {
             </VStack>
           </Stack>
 
+          {/* componente para agregar al carrito */}
           <ItemCount product={product} />
 
+          {/* info de envio */}
           <Stack direction="row" alignItems="center" justifyContent={"center"}>
             <MdLocalShipping />
             <Text>Hacemos envios a todo el pais via Correo Argentino!</Text>
