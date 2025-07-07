@@ -20,7 +20,7 @@ const ItemDetailContainer = ({ product }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [mainImage, setMainImage] = useState("");
 
-  // Safely format price
+  // cambiando formato de precio
   const formatPrice = (price) => {
     const numericPrice = Number(price) || 0;
     return numericPrice.toFixed(2);
@@ -28,7 +28,7 @@ const ItemDetailContainer = ({ product }) => {
 
   useEffect(() => {
     if (product) {
-      // Set the main image
+      
       const img = product.thumbnail || 
                  (product.images && product.images[0]) || 
                  'https://via.placeholder.com/600x400?text=No+Image';

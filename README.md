@@ -1,3 +1,11 @@
+Nota:
+/add-doc esta hecha pero no tiene un link directo en la homepage, planeo hacerle un login y auth para poder entrar ahi antes de colgarlo en el home
+
+
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
