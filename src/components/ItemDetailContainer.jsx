@@ -21,12 +21,12 @@ const ItemDetailContainer = ({ product }) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [mainImage, setMainImage] = useState("");
   
-  // Color mode values
+  // color mode valores
   const textColor = useColorModeValue("gray.900", "gray.400");
   const dividerColor = useColorModeValue("gray.200", "gray.600");
   const descriptionColor = useColorModeValue("gray.500", "gray.400");
 
-  // Safely format price
+  // formato de precio
   const formatPrice = (price) => {
     const numericPrice = Number(price) || 0;
     return numericPrice.toFixed(2);
@@ -116,7 +116,7 @@ const ItemDetailContainer = ({ product }) => {
             </Text>
           </Box>
 
-          {/* Product description */}
+          {}
           <Stack
             spacing={{ base: 4, sm: 6 }}
             direction={"column"}
