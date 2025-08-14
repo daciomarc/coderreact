@@ -34,7 +34,7 @@ const ItemDetailContainer = ({ product }) => {
   const descriptionColor = useColorModeValue("gray.500", "gray.400");
   const float = `${floatAnimation} 3s ease-in-out infinite`;
 
-  // Safely format price
+  // Safely format price into two decimal places
   const formatPrice = (price) => {
     const numericPrice = Number(price) || 0;
     return numericPrice.toFixed(2);
