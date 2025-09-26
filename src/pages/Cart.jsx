@@ -75,7 +75,7 @@ const Cart = () => {
                   <Text>Precio: ${Number(item.price).toFixed(2)}</Text>
                   <HStack>
                     <IconButton
-                      aria-label="Disminuir cantidad"
+                      aria-label="Reducir cantidad"
                       icon={<MinusIcon />}
                       size="sm"
                       onClick={() => removeProductFromCart(item)}
